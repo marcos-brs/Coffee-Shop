@@ -166,12 +166,12 @@ def unprocessable(error):
     return jsonify({
         "success": False,
         "error": 422,
-        "message": "unprocessable"
+        "message": "Unprocessable Entity"
     }), 422
 
 
 '''
-@TODO implement error handlers using the @app.errorhandler(error) decorator
+implement error handlers using the @app.errorhandler(error) decorator
     each error handler should return (with approprate messages):
              jsonify({
                     "success": False,
@@ -182,9 +182,18 @@ def unprocessable(error):
 '''
 
 '''
-@TODO implement error handler for 404
+implement error handler for 404
     error handler should conform to general task above
 '''
+
+
+@app.errorhandler(404)
+def not_found(error):
+    return jsonify({
+        "success": False,
+        "error": 404,
+        "message": "Not Found"
+    }), 422
 
 
 '''
