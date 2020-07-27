@@ -102,8 +102,7 @@ def create_drink(f):
 @requires_auth('patch:drinks')
 def update_drink(f, id):
     try:
-
-        drink = drink = Drink.query.filter(Drink.id == id).one_or_none()
+        drink = Drink.query.filter(Drink.id == id).one_or_none()
 
         data = dict(request.form or request.json or request.data)
         title = data.get('title', None)
@@ -131,7 +130,6 @@ def update_drink(f, id):
 
 
 '''
-@TODO implement endpoint
     DELETE /drinks/<id>
         where <id> is the existing model id
         it should respond with a 404 error if <id> is not found
@@ -142,13 +140,28 @@ def update_drink(f, id):
 '''
 
 
+@app.route('/drinks/<int:id>', methods=['DELETE'])
+@requires_auth('delete:drinks')
+def delete_drink(f, id):
+    try:
+        drink = Drink.query.filter(Drink.id == id).one_or_none()
+        drink.delete()
+
+        return jsonify({
+            'success': True,
+            'delete': id
+        })
+    except:
+        abort(422)
+
+
 # Error Handling
 '''
 Example error handling for unprocessable entity
 '''
 
 
-@ app.errorhandler(422)
+@app.errorhandler(422)
 def unprocessable(error):
     return jsonify({
         "success": False,
@@ -180,7 +193,7 @@ implement error handler for AuthError
 '''
 
 
-@ app.errorhandler(AuthError)
+@app.errorhandler(AuthError)
 def handle_auth_error(ex):
     """
     Receive the raised authorization error and propagates it as response
