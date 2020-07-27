@@ -45,7 +45,7 @@ def list_drinks():
 
 @app.route('/drinks-detail', methods=['GET'])
 @requires_auth('get:drinks-detail')
-def list_drinks_detail():
+def list_drinks_detail(f):
     drinks = Drink.query.all()
     formatted_drinks = [drink.long() for drink in drinks]
 
@@ -56,7 +56,6 @@ def list_drinks_detail():
 
 
 '''
-@TODO implement endpoint
     POST /drinks
         it should create a new row in the drinks table
         it should require the 'post:drinks' permission
@@ -64,6 +63,27 @@ def list_drinks_detail():
     returns status code 200 and json {"success": True, "drinks": drink} where drink an array containing only the newly created drink
         or appropriate status code indicating reason for failure
 '''
+
+
+@app.route('/drinks', methods=['POST'])
+@requires_auth('post:drinks')
+def create_drink(f):
+    try:
+        data = dict(request.form or request.json or request.data)
+        title = data.get('title')
+        recipe = data.get('recipe')
+
+        if type(recipe) != str:
+            recipe = json.dumps(recipe)
+
+        new_drink = Drink(title=title, recipe=recipe)
+        new_drink.insert()
+        return jsonify({
+            'success': True,
+            'drinks': new_drink.long()
+        })
+    except:
+        abort(422)
 
 
 '''
@@ -97,7 +117,7 @@ Example error handling for unprocessable entity
 '''
 
 
-@app.errorhandler(422)
+@ app.errorhandler(422)
 def unprocessable(error):
     return jsonify({
         "success": False,
@@ -110,7 +130,7 @@ def unprocessable(error):
 @TODO implement error handlers using the @app.errorhandler(error) decorator
     each error handler should return (with approprate messages):
              jsonify({
-                    "success": False, 
+                    "success": False,
                     "error": 404,
                     "message": "resource not found"
                     }), 404
@@ -119,17 +139,17 @@ def unprocessable(error):
 
 '''
 @TODO implement error handler for 404
-    error handler should conform to general task above 
+    error handler should conform to general task above
 '''
 
 
 '''
 implement error handler for AuthError
-    error handler should conform to general task above 
+    error handler should conform to general task above
 '''
 
 
-@app.errorhandler(AuthError)
+@ app.errorhandler(AuthError)
 def handle_auth_error(ex):
     """
     Receive the raised authorization error and propagates it as response
