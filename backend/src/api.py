@@ -128,7 +128,7 @@ def update_drink(f, id):
 
         return jsonify({
             'success': True,
-            'drinks': drink.long()
+            'drinks': [drink.long()]
         })
     except:
         abort(422)
