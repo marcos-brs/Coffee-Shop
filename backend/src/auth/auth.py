@@ -1,9 +1,9 @@
 import json
-from flask import request, _request_ctx_stack
 from functools import wraps
-from jose import jwt
 from urllib.request import urlopen
 
+from flask import request
+from jose import jwt
 
 AUTH0_DOMAIN = 'coffee-shop-zerocoolbr.us.auth0.com'
 ALGORITHMS = ['RS256']
@@ -71,7 +71,8 @@ def get_token_auth_header():
 
     it should raise an AuthError if permissions are not included in the payload
         !!NOTE check your RBAC settings in Auth0
-    it should raise an AuthError if the requested permission string is not in the payload permissions array
+    it should raise an AuthError if the requested permission string is not 
+    in the payload permissions array
     return true otherwise
 '''
 
@@ -101,7 +102,8 @@ def check_permissions(permission, payload):
     it should validate the claims
     return the decoded payload
 
-    !!NOTE urlopen has a common certificate error described here: https://stackoverflow.com/questions/50236117/scraping-ssl-certificate-verify-failed-error-for-http-en-wikipedia-org
+    !!NOTE urlopen has a common certificate error described here: 
+    https://stackoverflow.com/questions/50236117/scraping-ssl-certificate-verify-failed-error-for-http-en-wikipedia-org
 '''
 
 
@@ -155,7 +157,7 @@ def verify_decode_jwt(token):
             }, 400)
     raise AuthError({
         'code': 'invalid_header',
-                'description': 'Unable to find the appropriate key.'
+        'description': 'Unable to find the appropriate key.'
     }, 400)
 
 
@@ -180,4 +182,5 @@ def requires_auth(permission=''):
             return f(payload, *args, **kwargs)
 
         return wrapper
+
     return requires_auth_decorator

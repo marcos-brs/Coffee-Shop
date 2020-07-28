@@ -1,7 +1,10 @@
 venv/
 .vscode/
+.idea/
 __pycache__/
 test.db
+database.db
+backend/src/database/database.db
 
 # OS generated files #
 ######################
@@ -12,4 +15,3 @@ test.db
 .Trashes
 ehthumbs.db
 Thumbs.db
-backend/src/database/database.db
