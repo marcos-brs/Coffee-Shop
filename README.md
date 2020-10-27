@@ -1,35 +1,42 @@
-# Coffee Shop Full Stack
+<h1 align="center">Bem-vindo ao Coffee Shop 👋</h1>
+<p>
+  <a href="LICENSE" target="_blank">
+    <img alt="License: MIT" src="https://img.shields.io/badge/License-MIT-green.svg" />
+  </a>
+</p>
 
-## Full Stack Nano - IAM Final Project
+> Esse repositório possui uma aplicação Full Stack de um Coffee Shop
 
-Udacity has decided to open a new digitally enabled cafe for students to order drinks, socialize, and study hard. But they need help setting up their menu experience.
+## O que a aplicação faz
 
-You have been called on to demonstrate your newly learned skills to create a full stack drink menu application. The application must:
+1. Mostra visualmente uma representação das proporções de ingredientes em cada bebida.
+2. Permite que qualquer usuário veja o nome das bebidas e sua representação visual.
+3. Permite que os barmans veja informações sobre a receita da bebida.
+4. Permite que os gerentes criem novas bebidas e editem as já existentes.
 
-1) Display graphics representing the ratios of ingredients in each drink.
-2) Allow public users to view drink names and graphics.
-3) Allow the shop baristas to see the recipe information.
-4) Allow the shop managers to create new drinks and edit existing drinks.
-
-## Tasks
-
-There are `@TODO` comments throughout the project. We recommend tackling the sections in order. Start by reading the READMEs in:
-
-1. [`./backend/`](./backend/README.md)
-2. [`./frontend/`](./frontend/README.md)
-
-## About the Stack
-
-We started the full stack application for you. It is desiged with some key functional areas:
+## Tecnologias
 
 ### Backend
 
-The `./backend` directory contains a partially completed Flask server with a pre-written SQLAlchemy module to simplify your data needs. You will need to complete the required endpoints, configure, and integrate Auth0 for authentication.
+O diretório `./backend` contem uma aplicação Flask com SQLAlchemy.
 
-[View the README.md within ./backend for more details.](./backend/README.md)
+[Veja o README dentro do diretório ./backend para mais informações](./backend/README.md)
 
 ### Frontend
 
-The `./frontend` directory contains a complete Ionic frontend to consume the data from the Flask server. You will only need to update the environment variables found within (./frontend/src/environment/environment.ts) to reflect the Auth0 configuration details set up for the backend app. 
+O diretório `./frontend` contém uma aplicação com Ionic e Angular que consume a API criada em Flask.
 
-[View the README.md within ./frontend for more details.](./frontend/README.md)
+[Veja o README dentro do diretório ./frontend para mais informações](./frontend/README.md)
+
+## Autor
+
+👤 **Marcos Santana**
+
+- LinkedIn: [@marcosbrs](https://linkedin.com/in/marcosbrs)
+- Medium: [@marcos.brs](https://medium.com/@marcos.brs)
+- Twitter: [@mbrsantana](https://twitter.com/mbrsantana)
+
+## 📝 License
+
+Copyright © 2020 [Marcos Santana](https://github.com/zerocoolbr).<br />
+This project is [MIT](LICENSE) licensed.
