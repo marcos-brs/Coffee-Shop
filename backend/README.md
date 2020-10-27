@@ -1,85 +1,101 @@
-# Coffee Shop Backend
+<h1 align="center">Bem-vindo ao backend do Coffee Shop 👋</h1>
+<p>
+  <a href="../LICENSE" target="_blank">
+    <img alt="License: MIT" src="https://img.shields.io/badge/License-MIT-green.svg" />
+  </a>
+</p>
 
-## Getting Started
+> Esse diretório possui um backend REST API para servir o frontend da aplicação
 
-### Installing Dependencies
+## Principais Dependências
 
-#### Python 3.7
+- [x] [Flask](http://flask.pocoo.org/) - Um framework de micro serviços leve que será responsável por lidar com os requests e responses da aplicação
+- [x] [SQLAlchemy](https://www.sqlalchemy.org/) e [Flask-SQLAlchemy](https://flask-sqlalchemy.palletsprojects.com/en/2.x/) - Bibliotecas para lidar de forma fácil com banco de dados
+- [x] [jose](https://python-jose.readthedocs.io/en/latest/) - Biblioteca de assinatura e criptografia de objeto JavaScript para JWTs
 
-Follow instructions to install the latest version of python for your platform in the [python docs](https://docs.python.org/3/using/unix.html#getting-and-installing-the-latest-version-of-python)
+## Instruções de instalação e configuração
 
-#### Virtual Enviornment
+Baixe o repositório e navegue para a pasta `backend`
 
-We recommend working within a virtual environment whenever using Python for projects. This keeps your dependencies for each project separate and organaized. Instructions for setting up a virual enviornment for your platform can be found in the [python docs](https://packaging.python.org/guides/installing-using-pip-and-virtual-environments/)
+```bash
+git clone https://github.com/zerocoolbr/Coffee-Shop.git
+cd Coffee-Shop
+cd backend
+```
 
-#### PIP Dependencies
-
-Once you have your virtual environment setup and running, install dependencies by naviging to the `/backend` directory and running:
+Instale as dependências
 
 ```bash
 pip install -r requirements.txt
 ```
 
-This will install all of the required packages we selected within the `requirements.txt` file.
+É necessário editar o arquivo `src/auth/auth.py` para incluir as informações do Auth0
 
-##### Key Dependencies
+### Auth0
 
-- [Flask](http://flask.pocoo.org/)  is a lightweight backend microservices framework. Flask is required to handle requests and responses.
+O [Auth0](https://auth0.com/) é uma é um serviço de autenticação de usuários de aplicações (Third-Party Authentication). Usaremos ele para a autenticação e gerenciamento de permissões e roles dos usuários. Siga o seguinte **passo a passo** para configurar o Auth0.
 
-- [SQLAlchemy](https://www.sqlalchemy.org/) and [Flask-SQLAlchemy](https://flask-sqlalchemy.palletsprojects.com/en/2.x/) are libraries to handle the lightweight sqlite database. Since we want you to focus on auth, we handle the heavy lift for you in `./src/database/models.py`. We recommend skimming this code first so you know how to interface with the Drink model.
+1. Crie uma nova conta no [Auth0](https://auth0.com/)
+2. Selecione um único domínio
+3. Crie um novo Single Page Web Application
+4. Crie uma nova API
+   - nas configurações da API
+     - Ative o RBAC (Role Based Access Control)
+     - Habilite Adicionar Permissões nos tokens de acesso
+5. Crie as seguintes permissões na API:
+   - `get:drinks-detail`
+   - `post:drinks`
+   - `patch:drinks`
+   - `delete:drinks`
+6. Crie as roles para:
+   - Barista
+     - pode `get:drinks-detail`
+   - Manager
+     - pode realizar todas as ações
+7. Teste as permissões com o [Postman](https://getpostman.com).
+   - Registre 2 usuários - atribua um a role de Barista e o outro de Manager.
+   - Logue em cada um dos usuários para gerar um JWT e o anote.
+   - Importe o postman collection `coffee-shop.postman_collection.json`
+   - Clique com o botão direito no diretório da collection de barista e manager, navegue até a tab de autorização e inclua o JWT que você anotou para cada um.
+   - Rode todas as collections e verifique se tudo funcionou corretamente
 
-- [jose](https://python-jose.readthedocs.io/en/latest/) JavaScript Object Signing and Encryption for JWTs. Useful for encoding, decoding, and verifying JWTS.
+## Instruções para uso
 
-## Running the server
-
-From within the `./src` directory first ensure you are working using your created virtual environment.
-
-Each time you open a new terminal session, run:
+Primeiro é necessário setar a variável ambiente `FLASK_APP` para o arquivo `src/api.py`. No linux isso pode ser feito da seguinte maneira:
 
 ```bash
 export FLASK_APP=api.py;
 ```
 
-To run the server, execute:
+Para setar a variável ambiente no Windows via CMD:
+
+```cmd
+set FLASK_APP="api.py"
+```
+
+Para setar a variável ambiente no Windows via Powershell:
+
+```powershell
+$env:FLASK_APP="api.py"
+```
+
+Após setar a variável ambiente basta iniciar a aplicação Flask
 
 ```bash
 flask run --reload
 ```
 
-The `--reload` flag will detect file changes and restart the server automatically.
+A flag `reload` faz com que a aplicação reinicie automáticamente caso houver alguma mudança no código (hot-reload).
 
-## Tasks
+## Autor
 
-### Setup Auth0
+👤 **Marcos Santana**
 
-1. Create a new Auth0 Account
-2. Select a unique tenant domain
-3. Create a new, single page web application
-4. Create a new API
-    - in API Settings:
-        - Enable RBAC
-        - Enable Add Permissions in the Access Token
-5. Create new API permissions:
-    - `get:drinks-detail`
-    - `post:drinks`
-    - `patch:drinks`
-    - `delete:drinks`
-6. Create new roles for:
-    - Barista
-        - can `get:drinks-detail`
-    - Manager
-        - can perform all actions
-7. Test your endpoints with [Postman](https://getpostman.com). 
-    - Register 2 users - assign the Barista role to one and Manager role to the other.
-    - Sign into each account and make note of the JWT.
-    - Import the postman collection `./starter_code/backend/udacity-fsnd-udaspicelatte.postman_collection.json`
-    - Right-clicking the collection folder for barista and manager, navigate to the authorization tab, and including the JWT in the token field (you should have noted these JWTs).
-    - Run the collection and correct any errors.
-    - Export the collection overwriting the one we've included so that we have your proper JWTs during review!
+- LinkedIn: [@marcosbrs](https://linkedin.com/in/marcosbrs)
+- Medium: [@marcos.brs](https://medium.com/@marcos.brs)
+- Twitter: [@mbrsantana](https://twitter.com/mbrsantana)
 
-### Implement The Server
+## 📝 License
 
-There are `@TODO` comments throughout the `./backend/src`. We recommend tackling the files in order and from top to bottom:
-
-1. `./src/auth/auth.py`
-2. `./src/api.py`
+Copyright © 2020 [Marcos Santana](https://github.com/zerocoolbr).<br />
+This project is [MIT](../LICENSE) licensed.
