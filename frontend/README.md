@@ -1,56 +1,52 @@
-# Coffee Shop Frontend
+<h1 align="center">Bem-vindo ao frontend do Coffee Shop 👋</h1>
+<p>
+  <a href="../LICENSE" target="_blank">
+    <img alt="License: MIT" src="https://img.shields.io/badge/License-MIT-green.svg" />
+  </a>
+</p>
 
-## Getting Setup
+> Esse diretório possui um frontend feito em Ionic com Angular que consome o backend feito em Flask
 
-> _tip_: this frontend is designed to work with [Flask-based Backend](../backend). It is recommended you stand up the backend first, test using Postman, and then the frontend should integrate smoothly.
+## Principais Dependências
 
-### Installing Dependencies
+- [x] [Ionic](https://ionicframework.com/)
+- [x] [Angular](https://angular.io/)
 
-#### Installing Node and NPM
+## Instruções de instalação e configuração
 
-This project depends on Nodejs and Node Package Manager (NPM). Before continuing, you must download and install Node (the download includes NPM) from [https://nodejs.com/en/download](https://nodejs.org/en/download/).
+Instale o [Ionic CLI](https://ionicframework.com/docs/installation/cli) para que seja possível rodar a aplicação. Após a instalação, baixe o repositório e navegue para a pasta `frontend`
 
-#### Installing Ionic Cli
+```bash
+git clone https://github.com/zerocoolbr/Coffee-Shop.git
+cd Coffee-Shop
+cd frontend
+```
 
-The Ionic Command Line Interface is required to serve and build the frontend. Instructions for installing the CLI  is in the [Ionic Framework Docs](https://ionicframework.com/docs/installation/cli).
-
-#### Installing project dependencies
-
-This project uses NPM to manage software dependencies. NPM Relies on the package.json file located in the `frontend` directory of this repository. After cloning, open your terminal and run:
+Instale as dependências
 
 ```bash
 npm install
 ```
 
->_tip_: **npm i** is shorthand for **npm install**
+Abra o arquivo `./src/environments/environments.ts` e preencha com as informações do Auth0 de forma similar feito no backend.
 
-## Required Tasks
+## Instruções para uso
 
-### Configure Enviornment Variables
-
-Ionic uses a configuration file to manage environment variables. These variables ship with the transpiled software and should not include secrets.
-
-- Open `./src/environments/environments.ts` and ensure each variable reflects the system you stood up for the backend.
-
-## Running Your Frontend in Dev Mode
-
-Ionic ships with a useful development server which detects changes and transpiles as you work. The application is then accessible through the browser on a localhost port. To run the development server, cd into the `frontend` directory and run:
+Primeiro garanta que o backend está funcionando e rodando normalmente. Para rodar a aplicação frontend execute o comando:
 
 ```bash
 ionic serve
 ```
 
->_tip_: Do not use **ionic serve**  in production. Instead, build Ionic into a build artifact for your desired platforms.
-[Checkout the Ionic docs to learn more](https://ionicframework.com/docs/cli/commands/build)
+## Autor
 
-## Key Software Design Relevant to Our Coursework
+👤 **Marcos Santana**
 
-The frontend framework is a bit beefy; here are the two areas to focus your study.
+- LinkedIn: [@marcosbrs](https://linkedin.com/in/marcosbrs)
+- Medium: [@marcos.brs](https://medium.com/@marcos.brs)
+- Twitter: [@mbrsantana](https://twitter.com/mbrsantana)
 
-### Authentication
+## 📝 License
 
-The authentication system used for this project is Auth0. `./src/services/auth.service.ts` contains the logic to direct a user to the Auth0 login page, managing the JWT token upon successful callback, and handle setting and retrieving the token from the local store. This token is then consumed by our DrinkService (`./src/services/auth.service.ts`) and passed as an Authorization header when making requests to our backend.
-
-### Authorization
-
-The Auth0 JWT includes claims for permissions based on the user's role within the Auth0 system. This project makes use of these claims using the `auth.can(permission)` method which checks if particular permissions exist within the JWT permissions claim of the currently logged in user. This method is defined in  `./src/services/auth.service.ts` and is then used to enable and disable buttons in `./src/pages/drink-menu/drink-form/drink-form.html`.
+Copyright © 2020 [Marcos Santana](https://github.com/zerocoolbr).<br />
+This project is [MIT](../LICENSE) licensed.
